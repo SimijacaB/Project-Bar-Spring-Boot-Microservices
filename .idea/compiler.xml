@@ -7,9 +7,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="microservices-eureka" />
         <module name="microservices-gateway" />
+        <module name="microservices-eureka" />
         <module name="microservices-config" />
+      </profile>
+      <profile name="Annotation profile for ProjectBarMicroservices" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.5.5.Final/mapstruct-processor-1.5.5.Final.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.5.5.Final/mapstruct-1.5.5.Final.jar" />
+        </processorPath>
+        <module name="microservices-user" />
       </profile>
     </annotationProcessing>
   </component>
@@ -18,6 +28,7 @@
       <module name="microservices-config" options="-parameters" />
       <module name="microservices-eureka" options="-parameters" />
       <module name="microservices-gateway" options="-parameters" />
+      <module name="microservices-user" options="-parameters" />
     </option>
   </component>
 </project>
