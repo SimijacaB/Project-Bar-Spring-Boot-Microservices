@@ -8,17 +8,25 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="microservices-gateway" />
+        <module name="microservices-order" />
         <module name="microservices-eureka" />
         <module name="microservices-config" />
         <module name="microservices-product" />
+        <module name="microservices-ingredient" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="microservice-ingredient" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="microservice-ingredient" options="-parameters" />
       <module name="microservices-config" options="-parameters" />
       <module name="microservices-eureka" options="-parameters" />
       <module name="microservices-gateway" options="-parameters" />
+      <module name="microservices-ingredient" options="-parameters" />
+      <module name="microservices-order" options="-parameters" />
       <module name="microservices-product" options="-parameters" />
     </option>
   </component>

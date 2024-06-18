@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +25,8 @@ public class Product {
     private String name;
     private String description;
     private Double existence;
-    private Map<String,String> ingredients; // Mapa de ingredientes (nombre del ingrediente -> cantidad requerida)
+    @OneToMany(mappedBy = "productId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProductIngredients> productIngredients = new ArrayList<>();
     // private Photo photo;
     private Double price;
     private Status status;

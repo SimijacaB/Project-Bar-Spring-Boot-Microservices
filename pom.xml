@@ -23,6 +23,9 @@
         <module>microservices-eureka</module>
         <module>microservices-config</module>
         <module>microservices-product</module>
+        <module>microservices-ingredient</module>
+        <module>microservices-order</module>
+
     </modules>
 
   <properties>

@@ -1,6 +1,7 @@
 package com.microservices.product.controller;
 
 
+import com.microservices.product.dto.ProductIngredientRequestDTO;
 import com.microservices.product.entities.Product;
 import com.microservices.product.service.IProductService;
 import org.springframework.http.HttpStatus;
@@ -31,6 +32,24 @@ public class ProductController {
     @GetMapping("/search/{name}")
     public ResponseEntity<?> findByName(@PathVariable String productName){
         return ResponseEntity.ok(productService.findByName(productName));
+    }
+
+    @PutMapping("/{productId}/ingredients")
+    public ResponseEntity<Product> updateProductIngredients(
+            @PathVariable Long productId,
+            @RequestBody ProductIngredientRequestDTO request){
+        Product updatedProduct = productService.updateProductIngredients(productId, request.getIngredientIds(),
+                request.getQuantities());
+        return ResponseEntity.ok(updatedProduct);
+
+
+        /*
+            {
+                "ingredientIds": [1, 2, 3],
+                "quantities": ["100g", "200ml", "50g"]
+            }
+
+         */
     }
 
 }

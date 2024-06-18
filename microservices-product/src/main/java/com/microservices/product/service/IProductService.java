@@ -14,6 +14,8 @@ public interface IProductService {
 
     void update(Product product);
 
+    Product updateProductIngredients(Long productId, List<Long> ingredientIds, List<Double> quantities);
+
 
 
 }
