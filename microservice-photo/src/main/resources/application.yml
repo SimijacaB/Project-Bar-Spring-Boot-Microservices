@@ -1,12 +1,12 @@
 server:
-  port: 8093
+  port: 8094
 
 spring:
   application:
-    name: msvc-user
+    name: msvc-photo
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/userDb
+    url: jdbc:mysql://localhost:3306/photoDb
     username: root
     password: toor
   jpa:

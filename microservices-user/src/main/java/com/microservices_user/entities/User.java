@@ -1,7 +1,6 @@
 package com.microservices_user.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
 
 
 @Entity

@@ -73,10 +73,6 @@ public class UserController {
         userService.updateCredentials(id, userDTO);
     }
 
-/*    public ResponseEntity<?> login(@RequestBody UserLoginDTO userLoginDTO){
-        return ResponseEntity.ok(userService.login(userLoginDTO));
-    }*/
-
     @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable Long id){
         userService.delete(id);

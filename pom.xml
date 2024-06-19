@@ -23,6 +23,8 @@
         <module>microservices-eureka</module>
         <module>microservices-config</module>
         <module>microservices-user</module>
+        <module>microservice-bill</module>
+        <module>microservice-photo</module>
     </modules>
 
   <properties>

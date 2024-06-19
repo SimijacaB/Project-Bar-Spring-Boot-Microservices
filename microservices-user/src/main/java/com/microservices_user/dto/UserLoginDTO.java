@@ -3,6 +3,7 @@ package com.microservices_user.dto;
 import lombok.Data;
 
 
+
 public class UserLoginDTO {
     private String username;
     private String password;
