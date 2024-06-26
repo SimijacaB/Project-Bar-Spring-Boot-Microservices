@@ -1,12 +1,15 @@
 package com.microservices.product.service;
 
+import com.microservices.product.dto.ProductIngredientRequestDTO;
 import com.microservices.product.entities.Product;
 import com.microservices.product.entities.ProductIngredients;
 import com.microservices.product.persistence.IProductIngredientsRepository;
 import com.microservices.product.persistence.IProductRepository;
+import jakarta.ws.rs.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements IProductService{
@@ -20,7 +23,7 @@ public class ProductServiceImpl implements IProductService{
     }
 
     @Override
-    public List<Product> finAll() {
+    public List<Product> findAll() {
         return (List<Product>) productRepository.findAll();
     }
 
@@ -43,29 +46,26 @@ public class ProductServiceImpl implements IProductService{
     }
 
     @Override
-    public Product updateProductIngredients(Long productId, List<Long> ingredientIds, List<Double> quantities) {
+    public Product updateProductIngredients(Long productId, List<ProductIngredientRequestDTO> ingredients) {
+
         Product product = productRepository.findById(productId)
-                .orElseThrow( () -> new RuntimeException("Product Not Found"));
+                .orElseThrow(() -> new NotFoundException("Product not found"));
 
-        // Eliminar los ingredientes actuales
-        productIngredientRepository.deleteAll(productIngredientRepository.findByProductId(productId));
+        productIngredientRepository.deleteAll(product.getProductIngredients());
 
-        // Agregar los nuevos ingredientes
-        for (int i = 0; i < ingredientIds.size(); i++) {
-            Long ingredientId = ingredientIds.get(i);
-            Double quantity = quantities.get(i);
+        List<ProductIngredients> newIngredients = ingredients.stream()
+                .map(request -> {
+                    ProductIngredients productIngredient = new ProductIngredients();
+                    productIngredient.setProduct(product);
+                    productIngredient.setIngredientId(request.getIngredientId());
+                    productIngredient.setQuantity(request.getQuantity());
+                    return productIngredient;
+                }).collect(Collectors.toList());
 
-            ProductIngredients productIngredients = new ProductIngredients();
-            productIngredients.setProductId(productId);
-            productIngredients.setIngredientId(ingredientId);
-            productIngredients.setQuantity(quantity);
-
-            productIngredientRepository.save(productIngredients);
-        }
-
-        // Actualizo el producto
-        product.setProductIngredients(productIngredientRepository.findByProductId(productId));
-
+        product.setProductIngredients(newIngredients);
         return productRepository.save(product);
+
     }
+
+
 }

@@ -1,5 +1,6 @@
 package com.microservices.product.dto;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,9 +10,10 @@ import java.util.List;
 @Setter
 public class ProductIngredientRequestDTO {
 
-    private List<Long> ingredientIds;
-
-    private List<Double> quantities;
+    @NotNull
+    private Long ingredientId;
+    @NotNull
+    private Double quantity;
 
 
 }

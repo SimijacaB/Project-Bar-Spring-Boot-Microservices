@@ -33,7 +33,7 @@ public class Order {
     @Column(name = "total_to_pay")
     private Double totalToPay;
 
-    @Column(name = "waite_id")
+    @Column(name = "waiter_id")
     private String waiterId;
 
     private String notes;

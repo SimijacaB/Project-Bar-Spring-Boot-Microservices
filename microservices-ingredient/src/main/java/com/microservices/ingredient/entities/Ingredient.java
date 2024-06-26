@@ -23,8 +23,6 @@ public class Ingredient {
 
     private String name;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Long> productIds = new ArrayList<>();
 
     private Double amount;  // Cantidad en inventario
 

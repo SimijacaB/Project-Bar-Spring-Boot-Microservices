@@ -1,12 +1,13 @@
 package com.microservices.product.service;
 
+import com.microservices.product.dto.ProductIngredientRequestDTO;
 import com.microservices.product.entities.Product;
 
 import java.util.List;
 
 public interface IProductService {
 
-    List<Product> finAll();
+    List<Product> findAll();
 
     List<Product> findByName(String name);
 
@@ -14,7 +15,7 @@ public interface IProductService {
 
     void update(Product product);
 
-    Product updateProductIngredients(Long productId, List<Long> ingredientIds, List<Double> quantities);
+    Product updateProductIngredients(Long productId, List<ProductIngredientRequestDTO> ingredients);
 
 
 
