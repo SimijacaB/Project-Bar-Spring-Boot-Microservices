@@ -12,6 +12,7 @@
         <module name="microservice-bill" />
         <module name="microservices-eureka" />
         <module name="microservices-config" />
+        <module name="microservice-invoice" />
       </profile>
       <profile name="Annotation profile for ProjectBarMicroservices" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -24,10 +25,14 @@
         <module name="microservices-user" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="microservice-bill" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="microservice-bill" options="-parameters" />
+      <module name="microservice-invoice" options="-parameters" />
       <module name="microservice-photo" options="-parameters" />
       <module name="microservices-config" options="-parameters" />
       <module name="microservices-eureka" options="-parameters" />
