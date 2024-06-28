@@ -16,6 +16,11 @@ public class IngredientController {
         this.ingredientService = ingredientService;
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Ingredient> getIngredientById(@PathVariable Long id){
+        Ingredient ingredient = ingredientService.findById(id);
+        return ResponseEntity.ok(ingredient);
+    }
 
     @GetMapping("/all")
     public ResponseEntity<?> findAll(){

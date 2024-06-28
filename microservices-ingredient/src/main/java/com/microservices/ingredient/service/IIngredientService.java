@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface IIngredientService {
 
+    Ingredient findById(Long id);
+
     List<Ingredient> findAll();
 
     List<Ingredient> findByName(String name);

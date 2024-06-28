@@ -42,17 +42,13 @@ public class ProductController {
     public ResponseEntity<Product> updateProductIngredients(
             @PathVariable Long productId,
             @RequestBody List<ProductIngredientRequestDTO> ingredients) {
-        Product updatedProduct = productService.updateProductIngredients(productId, ingredients);
-        return ResponseEntity.ok(updatedProduct);
-
-
-        /*
-            {
-                "ingredientIds": [1, 2, 3],
-                "quantities": [100, 200, 50]
-            }
-
-         */
+        try {
+            Product updatedProduct = productService.updateProductIngredients(productId, ingredients);
+            return ResponseEntity.ok(updatedProduct);
+        } catch (Exception e) {
+            e.printStackTrace();  // Para imprimir la traza del error en los logs
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 
 }

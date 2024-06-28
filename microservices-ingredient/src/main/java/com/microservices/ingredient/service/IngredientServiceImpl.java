@@ -2,6 +2,7 @@ package com.microservices.ingredient.service;
 
 import com.microservices.ingredient.entities.Ingredient;
 import com.microservices.ingredient.persistence.IIngredientRepository;
+import jakarta.ws.rs.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,12 @@ public class IngredientServiceImpl implements IIngredientService{
 
     public IngredientServiceImpl(IIngredientRepository ingredientRepository) {
         this.ingredientRepository = ingredientRepository;
+    }
+
+    @Override
+    public Ingredient findById(Long id) {
+        return ingredientRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Ingredient not found"));
     }
 
     @Override

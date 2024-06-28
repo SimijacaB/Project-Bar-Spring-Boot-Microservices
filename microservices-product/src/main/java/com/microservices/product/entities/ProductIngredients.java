@@ -1,10 +1,15 @@
 package com.microservices.product.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@Table(name = "product_ingredients")
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductIngredients {
 
     @Id

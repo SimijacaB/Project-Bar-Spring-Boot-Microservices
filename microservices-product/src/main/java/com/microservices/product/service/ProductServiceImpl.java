@@ -3,6 +3,8 @@ package com.microservices.product.service;
 import com.microservices.product.dto.ProductIngredientRequestDTO;
 import com.microservices.product.entities.Product;
 import com.microservices.product.entities.ProductIngredients;
+import com.microservices.product.feingclient.IngredientClient;
+import com.microservices.product.feingclient.IngredientDTO;
 import com.microservices.product.persistence.IProductIngredientsRepository;
 import com.microservices.product.persistence.IProductRepository;
 import jakarta.ws.rs.NotFoundException;
@@ -17,9 +19,12 @@ public class ProductServiceImpl implements IProductService{
     private final IProductRepository productRepository;
     private final IProductIngredientsRepository productIngredientRepository;
 
-    public ProductServiceImpl(IProductRepository productRepository, IProductIngredientsRepository productIngredientRepository) {
+    private final IngredientClient ingredientClient;
+
+    public ProductServiceImpl(IProductRepository productRepository, IProductIngredientsRepository productIngredientRepository, IngredientClient ingredientClient) {
         this.productRepository = productRepository;
         this.productIngredientRepository = productIngredientRepository;
+        this.ingredientClient = ingredientClient;
     }
 
     @Override
@@ -55,12 +60,15 @@ public class ProductServiceImpl implements IProductService{
 
         List<ProductIngredients> newIngredients = ingredients.stream()
                 .map(request -> {
-                    ProductIngredients productIngredient = new ProductIngredients();
-                    productIngredient.setProduct(product);
-                    productIngredient.setIngredientId(request.getIngredientId());
-                    productIngredient.setQuantity(request.getQuantity());
-                    return productIngredient;
-                }).collect(Collectors.toList());
+                    //Obtengo la información del ingrediente usando Feign Client
+                    IngredientDTO ingredientDTO = ingredientClient.getIngredientById(request.getIngredientId());
+
+                    ProductIngredients productIngredients = new ProductIngredients();
+                    productIngredients.setProduct(product);
+                    productIngredients.setIngredientId(ingredientDTO.getId());
+                    productIngredients.setQuantity(request.getQuantity());
+                    return productIngredients;
+                }).toList();
 
         product.setProductIngredients(newIngredients);
         return productRepository.save(product);
